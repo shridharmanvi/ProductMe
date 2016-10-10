@@ -7,44 +7,44 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.Callable;
 
 public class FetchExecutor implements Callable<String> {
     private CloseableHttpClient client;
-    private HttpGet httpGet;
 
     private String url;
 
-    public FetchExecutor(String url, CloseableHttpClient client, HttpGet httpGet) {
-        this.client = client;
-        this.httpGet = httpGet;
+    public FetchExecutor(String url) {
+        this.client = HttpClients.createDefault();
         this.url = url;
     }
 
     public String call() throws Exception {
-        client = HttpClients.createDefault();
-        httpGet = new HttpGet(url);
-        CloseableHttpResponse response = client.execute(httpGet);
-        HttpEntity entity = response.getEntity();
-        try {
+        if (url != null && !url.equals("")) {
 
-            if (entity != null) {
-                InputStream instream = entity.getContent();
-                return IOUtils.toString(instream, "UTF-8");
-
-            } else {
-                return null;
-            }
-        } finally {
-
+            HttpGet httpGet = new HttpGet(url);
+            CloseableHttpResponse response = client.execute(httpGet);
+            HttpEntity entity = response.getEntity();
             try {
-                response.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
+                if (entity != null) {
+                    InputStream instream = entity.getContent();
+                    return IOUtils.toString(instream, "UTF-8");
+
+                } else {
+                    return "NO-CONTENT";
+                }
+            } finally {
+
+                try {
+                    response.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            return null;
+        }
     }
 }
