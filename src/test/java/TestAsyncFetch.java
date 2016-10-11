@@ -1,4 +1,4 @@
-import crawler.main.AsyncFetch;
+import crawler.core.AsyncFetch;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -20,7 +20,7 @@ public class TestAsyncFetch {
 
         AsyncFetch fetch = new AsyncFetch(urls);
         fetch.fetchPages();
-        contents = fetch.getAllPagesContents();
-        System.out.println(contents.size());
+        // contents = fetch.getAllPagesContents();
+        // System.out.println(contents.size());
     }
 }

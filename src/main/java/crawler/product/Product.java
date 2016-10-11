@@ -4,56 +4,64 @@ public class Product {
     private String id;
     private String name;
     private String url;
-    private double cost;
+    private String cost;
+    private String clearanceCost;
     private String pictureUrl;
     private String description;
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
-    private double getCost() {
+    public String getCost() {
         return cost;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    private String getId() {
+    public String getId() {
         return id;
     }
 
-    private String getPictureUrl() {
+    public String getPictureUrl() {
         return pictureUrl;
     }
 
-    private String getUrl() {
+    public String getUrl() {
         return url;
     }
 
-    private void setCost(double cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    private void setId(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    private void setPictureUrl(String pictureUrl) {
+    public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
 
-    private void setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
+    public String getClearanceCost() {
+        return clearanceCost;
+    }
+
+    public void setClearanceCost(String clearanceCost) {
+        this.clearanceCost = clearanceCost;
+    }
 }

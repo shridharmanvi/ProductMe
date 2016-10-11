@@ -1,9 +1,6 @@
-package crawler.main;
+package crawler.core;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -11,36 +8,38 @@ import java.util.concurrent.Future;
 public class AsyncFetch {
 
     private Set<String> urls;
-    private Set<String> allPagesContents = new HashSet<String>();
-    private List<Future<String>> futures;
+    private Set<HashMap<String, String>> allPagesContents = new HashSet<HashMap<String, String>>(); // <url, content>
+    private List<Future<HashMap<String, String>>> futures;
 
     public AsyncFetch(Set<String> urls) {
         this.urls = urls;
-        this.futures = new ArrayList<Future<String>>();
+        this.futures = new ArrayList<Future<HashMap<String, String>>>();
     }
 
-    public Set<String> getAllPagesContents() {
+    public Set<HashMap<String, String>> getAllPagesContents() {
         return allPagesContents;
     }
 
     public void fetchPages() {
-        ExecutorService service = Executors.newFixedThreadPool(10); // Change number of threads here.
+        ExecutorService fetchService = Executors.newFixedThreadPool(10); // Change number of threads here.
 
         long start = System.currentTimeMillis();
 
         for (final String url : urls) {
-            futures.add(service.submit(new FetchExecutor(url)));
+            futures.add(fetchService.submit(new FetchExecutor(url)));
         }
 
         long mid = System.currentTimeMillis();
 
         try {
-            for (Future<String> result : futures) {
+            for (Future<HashMap<String, String>> result : futures) {
                 allPagesContents.add(result.get());
             }
 
         } catch (Exception ignored) {
 
+        } finally {
+            fetchService.shutdown();
         }
         long end = System.currentTimeMillis();
 
