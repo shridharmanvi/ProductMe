@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 
-public class FetchExecutor implements Callable<HashMap<String, String>> {
+public class FetchExecutor implements Callable<String> {
     private CloseableHttpClient client;
 
     private String url;
@@ -21,34 +21,27 @@ public class FetchExecutor implements Callable<HashMap<String, String>> {
         this.url = url;
     }
 
-    public HashMap<String, String> call() throws Exception {
-        if (url != null && !url.equals("")) {
+    public String call() throws Exception {
+        assert url != null;
 
-            HttpGet httpGet = new HttpGet(url);
-            CloseableHttpResponse response = client.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            try {
-                HashMap<String, String> content = new HashMap<String, String>();
+        HttpGet httpGet = new HttpGet(url);
+        CloseableHttpResponse response = client.execute(httpGet);
+        HttpEntity entity = response.getEntity();
+        try {
+            HashMap<String, String> content = new HashMap<String, String>();
 
-                if (entity != null) {
-
-                    InputStream instream = entity.getContent();
-                    content.put(url, IOUtils.toString(instream, "UTF-8"));
-
-                    return content;
-                } else {
-                    return new HashMap<String, String>();
-                }
-            } finally {
-
-                try {
-                    response.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (entity != null) {
+                InputStream instream = entity.getContent();
+                return IOUtils.toString(instream, "UTF-8");
+            } else {
+                return null;
             }
-        } else {
-            return null;
+        } finally {
+            try {
+                response.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

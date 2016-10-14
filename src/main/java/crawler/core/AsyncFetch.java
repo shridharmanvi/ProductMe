@@ -8,16 +8,16 @@ import java.util.concurrent.Future;
 public class AsyncFetch {
 
     private Set<String> urls;
-    private Set<HashMap<String, String>> allPagesContents = new HashSet<HashMap<String, String>>(); // <url, content>
-    private List<Future<HashMap<String, String>>> futures;
+
+    private Map<String,Future<String>> tasks = new HashMap<>();
+    private Map<String,String> results = new HashMap<>();
 
     public AsyncFetch(Set<String> urls) {
         this.urls = urls;
-        this.futures = new ArrayList<Future<HashMap<String, String>>>();
     }
 
-    public Set<HashMap<String, String>> getAllPagesContents() {
-        return allPagesContents;
+    public Map<String, String> getAllPagesContents() {
+        return results;
     }
 
     public void fetchPages() {
@@ -26,14 +26,15 @@ public class AsyncFetch {
         long start = System.currentTimeMillis();
 
         for (final String url : urls) {
-            futures.add(fetchService.submit(new FetchExecutor(url)));
+            tasks.put(url, fetchService.submit(new FetchExecutor(url)));
         }
 
         long mid = System.currentTimeMillis();
 
         try {
-            for (Future<HashMap<String, String>> result : futures) {
-                allPagesContents.add(result.get());
+            for (String url: tasks.keySet()) {
+                Future<String> task = tasks.get(url);
+                results.put(url, task.get());
             }
 
         } catch (Exception ignored) {

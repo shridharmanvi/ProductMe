@@ -1,7 +1,11 @@
+import crawler.PageParsers.BurlingtonParser;
 import crawler.core.AsyncFetch;
+import crawler.core.LoadParser;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 public class TestAsyncFetch {
@@ -22,5 +26,17 @@ public class TestAsyncFetch {
         fetch.fetchPages();
         // contents = fetch.getAllPagesContents();
         // System.out.println(contents.size());
+    }
+
+
+    @Test
+    public void testSelectorsLoad() {
+        Properties properties = new LoadParser("burlington").getSuperXPaths();
+        System.out.println(properties.getProperty("urls"));
+    }
+
+    @Test
+    public void testBurlingtonParser(){
+        BurlingtonParser burlingtonParser = new BurlingtonParser(new HashMap<String, String >());
     }
 }

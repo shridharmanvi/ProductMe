@@ -1,25 +1,34 @@
 package crawler.core;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class LoadParser {
-
     // Responsible for loading all xPaths/Css selectors from resource file
 
-    private Map<String, String> selectors;
+    private String client;
+    private Properties superXPaths = new Properties();
 
-    public LoadParser() {
-        selectors = new HashMap<String, String>();
-        loadFile();
+    public LoadParser(String client) {
+        this.client = client;
     }
 
     private void loadFile() {
         // Read resource file and load the hashmap
-        selectors.put("name", "Value");
+        String properties_file = client + ".properties";
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(properties_file);
+        if (inputStream != null) {
+            try {
+                superXPaths.load(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public Map<String, String> getSelectors() {
-        return selectors;
+    public Properties getSuperXPaths() {
+        return superXPaths;
     }
 }
