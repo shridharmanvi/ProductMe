@@ -4,19 +4,16 @@ import crawler.PageParsers.BurlingtonParser;
 import crawler.PageParsers.NascarParser;
 import crawler.PageParsers.Parser;
 import crawler.core.AsyncFetch;
+import crawler.core.LoadConfig;
 import crawler.core.TreeTraverser;
 import crawler.product.Product;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CrawlerMain {
-
     public static String outputFile = "";
 
-    private static Map<String, Parser> parserMap = new HashMap<>();
+    private static Map<String, Parser> parserMap = new HashMap<String, Parser>();
 
 
     public static void main(String[] args) {
@@ -26,12 +23,13 @@ public class CrawlerMain {
         Set<Product> products;
         Set<String> baseUrls = new HashSet<String>();
         String client = args[0];
+        LoadConfig.loadFile(client);
+
 
         // main category
         baseUrls.add("http://www.burlingtoncoatfactory.com/burlingtoncoatfactory/Coats-58378.aspx");
 
-        TreeTraverser traverser = new TreeTraverser(client);
-        System.out.println(traverser.getProps());
+        TreeTraverser traverser = new TreeTraverser();
         // Submit baseUrls to TreeTraversal along with the superXpath.
         // leafNodes = links.traverseToLeaf();
 

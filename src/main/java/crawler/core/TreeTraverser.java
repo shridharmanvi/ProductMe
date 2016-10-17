@@ -1,23 +1,25 @@
 package crawler.core;
 
 import java.util.HashSet;
-import java.util.Properties;
+import java.util.List;
 import java.util.Set;
 
 public class TreeTraverser {
     // Read the super xpath for this main category and traverse to end page
-    private String client;
-    Set<String> leafNodes = new HashSet<>();
-    Properties props;
 
+    Set<String> leafNodes = new HashSet<String>();
+    String superPaths = LoadConfig.getConfig().getProperty("super_paths");
 
-    public TreeTraverser(String client){
-        this.client = client;
-        this.props = new LoadParser(this.client).getSuperXPaths();
+    public TreeTraverser() {
+        System.out.println(superPaths);
     }
 
-    public Properties getProps(){
-        return this.props;
+    private void traverserPlanner(String super_path) {
+
+    }
+
+    private void traverse(String xpath) {
+
     }
 
 }

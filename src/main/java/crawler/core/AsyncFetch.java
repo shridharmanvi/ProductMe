@@ -1,6 +1,8 @@
 package crawler.core;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -9,8 +11,8 @@ public class AsyncFetch {
 
     private Set<String> urls;
 
-    private Map<String,Future<String>> tasks = new HashMap<>();
-    private Map<String,String> results = new HashMap<>();
+    private Map<String, Future<String>> tasks = new HashMap<String, Future<String>>();
+    private Map<String, String> results = new HashMap<String, String>();
 
     public AsyncFetch(Set<String> urls) {
         this.urls = urls;
@@ -32,7 +34,7 @@ public class AsyncFetch {
         long mid = System.currentTimeMillis();
 
         try {
-            for (String url: tasks.keySet()) {
+            for (String url : tasks.keySet()) {
                 Future<String> task = tasks.get(url);
                 results.put(url, task.get());
             }

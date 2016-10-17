@@ -1,14 +1,11 @@
 package crawler.PageParsers;
 
-import com.sun.org.apache.xpath.internal.XPath;
-import com.sun.org.apache.xpath.internal.XPathFactory;
+import crawler.core.LoadConfig;
 import crawler.product.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.w3c.dom.NodeList;
+import us.codecraft.xsoup.Xsoup;
 
-import javax.xml.xpath.XPathConstants;
 import java.util.Map;
 
 public class BurlingtonParser extends Parser {
@@ -21,15 +18,20 @@ public class BurlingtonParser extends Parser {
     public Product parsePage(String url, String webPage) throws Exception {
         Document doc = Jsoup.parse(webPage);
         Product product = new Product();
-
-        product.setName(doc.select(".product-details-title").text());
-        product.setClearanceCost(doc.select(".textPrice").text());
-        product.setCost(doc.select(".textPriceCompare").text());
-        product.setId(doc.select("#ctl03_MainContentArea_ctl00_ctl00_ctl00_ProductDisplay_ProductDescriptionModule_LblItemNumber").text().split("#")[1]);
+        
         product.setUrl(url);
+        product.setName(Xsoup.compile(LoadConfig.getConfig().getProperty("product.name"))
+                .evaluate(doc).get());
+        product.setClearanceCost(Xsoup.compile(LoadConfig.getConfig().getProperty("product.clearence_cost"))
+                .evaluate(doc).get());
+        product.setCost(Xsoup.compile(LoadConfig.getConfig().getProperty("product.cost"))
+                .evaluate(doc).get());
+        product.setPictureUrl(Xsoup.compile(LoadConfig.getConfig().getProperty("product.image_url"))
+                .evaluate(doc).get());
+        product.setId(Xsoup.compile(LoadConfig.getConfig().getProperty("product.id"))
+                .evaluate(doc).get().split("#")[1]);
 
-        Elements img = doc.select("#productMainImage");
-        product.setPictureUrl(img.attr("src"));
         return product;
     }
+
 }

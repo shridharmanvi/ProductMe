@@ -11,12 +11,11 @@ public abstract class Parser {
     private Map<String, String> webPages;
     private Set<Product> products;
 
-    Parser() {
-    }
+    Parser() {}
 
     Parser(Map<String, String> webPages) {
         this.webPages = webPages;
-        this.products = new HashSet<>();
+        this.products = new HashSet<Product>();
     }
 
     public Set<Product> parseProducts() {

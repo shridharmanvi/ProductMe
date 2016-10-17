@@ -8,7 +8,6 @@
     <artifactId>burlington-crawler</artifactId>
     <version>0.1</version>
 
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -38,7 +37,12 @@
             <version>4.3.4</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/us.codecraft/xsoup -->
+        <dependency>
+            <groupId>us.codecraft</groupId>
+            <artifactId>xsoup</artifactId>
+            <version>0.3.1</version>
+        </dependency>
 
     </dependencies>
 

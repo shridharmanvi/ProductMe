@@ -1,6 +1,6 @@
 import crawler.PageParsers.BurlingtonParser;
 import crawler.core.AsyncFetch;
-import crawler.core.LoadParser;
+import crawler.core.LoadConfig;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -28,15 +28,20 @@ public class TestAsyncFetch {
         // System.out.println(contents.size());
     }
 
-
     @Test
     public void testSelectorsLoad() {
-        Properties properties = new LoadParser("burlington").getSuperXPaths();
-        System.out.println(properties.getProperty("urls"));
+        // Properties properties = new LoadConfig("burlington").getConfig();
+        // System.out.println(properties.getProperty("urls"));
     }
 
     @Test
-    public void testBurlingtonParser(){
-        BurlingtonParser burlingtonParser = new BurlingtonParser(new HashMap<String, String >());
+    public void testBurlingtonParser() {
+        BurlingtonParser burlingtonParser = new BurlingtonParser(new HashMap<String, String>());
+    }
+
+    @Test
+    public void testTreeTraverser() {
+        Properties properties = LoadConfig.getConfig();
+        System.out.println(properties);
     }
 }
