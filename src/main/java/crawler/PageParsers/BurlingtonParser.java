@@ -5,7 +5,10 @@ import crawler.core.LoadConfig;
 import crawler.product.Product;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import us.codecraft.xsoup.Xsoup;
+
+import java.util.List;
 
 public class BurlingtonParser extends Parser {
 
@@ -27,6 +30,10 @@ public class BurlingtonParser extends Parser {
                 .evaluate(doc).get().split("#")[1]);
 
         return product;
+    }
+
+    public List<String> parseLinks(String xpath) {
+        throw new NotImplementedException();
     }
 
 }

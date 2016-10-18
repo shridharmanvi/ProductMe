@@ -32,10 +32,10 @@ public class CrawlerMain {
         for (SuperXpath superXpath : superXpathSet.getSuperXpathSet()) {
             TreeTraverser treeTraverser = new TreeTraverser(superXpath);
 
+
         }
 
-
-
+        /*
         AsyncFetch asyncFetch = new AsyncFetch(leafNodes);
         asyncFetch.fetchPages();
         contents = asyncFetch.getAllPagesContents();
@@ -54,7 +54,7 @@ public class CrawlerMain {
             System.out.println("Image url: " + product.getPictureUrl());
         }
 
-
+        */
     }
 
 }

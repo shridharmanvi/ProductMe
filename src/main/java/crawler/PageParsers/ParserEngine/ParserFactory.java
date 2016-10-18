@@ -1,6 +1,7 @@
 package crawler.PageParsers.ParserEngine;
 
 import crawler.PageParsers.BurlingtonParser;
+import crawler.PageParsers.LinksParser;
 import crawler.PageParsers.NascarParser;
 
 public class ParserFactory {
@@ -9,8 +10,11 @@ public class ParserFactory {
     public static Parser getParser(String parserType) {
         if (parserType.equalsIgnoreCase("burlington")) {
             return new BurlingtonParser();
-        } else if (parserType.equalsIgnoreCase("nascar")) {
+        } if (parserType.equalsIgnoreCase("nascar")) {
             return new NascarParser();
+        }
+        else if (parserType.equalsIgnoreCase("getlinks")){
+            return new LinksParser();
         }
         throw new IllegalArgumentException(parserType + " isn't valid");
     }

@@ -1,8 +1,12 @@
 package crawler.core.Traverser;
 
+import crawler.PageParsers.ParserEngine.Parser;
+import crawler.PageParsers.ParserEngine.ParserFactory;
+import crawler.core.DataExchangeHandler.AsyncFetch;
 import crawler.core.XpathEngine.SuperXpath;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class TreeTraverser {
@@ -13,13 +17,22 @@ public class TreeTraverser {
 
     public TreeTraverser(SuperXpath superXpath) {
         this.superXpath = superXpath;
+        traverserPlanner();
     }
 
     private void traverserPlanner() {
-        // AsyncGet the url from superXpath object
-        // Set<urls> subCategories= PageParser(Xpath)
-        //
 
+        Map<String, String> contents;
+        Set<String> urls = new HashSet<String>();
+        urls.add(this.superXpath.getUrl());
+
+        AsyncFetch fetch = new AsyncFetch(urls);
+        fetch.fetchPages();
+        contents = fetch.getAllPagesContents();
+
+        Parser linksparser = ParserFactory.getParser("getlinks");
+        linksparser.setWebPages(contents);
+        linksparser.parseLinks(String.valueOf(this.superXpath.getLevels().toArray()[0]));
     }
 
     private void traverse() {

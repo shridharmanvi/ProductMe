@@ -2,14 +2,13 @@ package crawler.PageParsers.ParserEngine;
 
 import crawler.product.Product;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Parser {
 
-    private Map<String, String> webPages;
+    protected Map<String, String> webPages;
     private Set<Product> products = new HashSet<Product>();
+    protected static final String prefix = "http://www.burlingtoncoatfactory.com/burlingtoncoatfactory/";
 
     public void setWebPages(Map<String, String> webPages) {
         this.webPages = webPages;
@@ -35,4 +34,6 @@ public abstract class Parser {
             return null;
         }
     }
+
+    public abstract List<String> parseLinks(String xpath);
 }
