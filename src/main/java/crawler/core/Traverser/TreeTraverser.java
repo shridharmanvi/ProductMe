@@ -15,11 +15,14 @@ public class TreeTraverser {
         this.superXpath = superXpath;
     }
 
-    private void traverserPlanner(String super_path) {
+    private void traverserPlanner() {
+        // AsyncGet the url from superXpath object
+        // Set<urls> subCategories= PageParser(Xpath)
+        //
 
     }
 
-    private void traverse(String xpath) {
+    private void traverse() {
 
     }
 

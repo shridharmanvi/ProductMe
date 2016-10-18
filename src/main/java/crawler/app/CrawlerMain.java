@@ -1,5 +1,8 @@
 package crawler.app;
 
+import crawler.PageParsers.ParserEngine.Parser;
+import crawler.PageParsers.ParserEngine.ParserFactory;
+import crawler.core.DataExchangeHandler.AsyncFetch;
 import crawler.core.LoadConfig;
 import crawler.core.Traverser.TreeTraverser;
 import crawler.core.XpathEngine.SuperXpath;
@@ -32,7 +35,7 @@ public class CrawlerMain {
         }
 
 
-        /*
+
         AsyncFetch asyncFetch = new AsyncFetch(leafNodes);
         asyncFetch.fetchPages();
         contents = asyncFetch.getAllPagesContents();
@@ -50,7 +53,7 @@ public class CrawlerMain {
             System.out.println("URL: " + product.getUrl());
             System.out.println("Image url: " + product.getPictureUrl());
         }
-        */
+
 
     }
 

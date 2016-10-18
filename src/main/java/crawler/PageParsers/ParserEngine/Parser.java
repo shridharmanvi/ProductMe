@@ -1,4 +1,4 @@
-package crawler.PageParsers;
+package crawler.PageParsers.ParserEngine;
 
 import crawler.product.Product;
 
@@ -15,7 +15,7 @@ public abstract class Parser {
         this.webPages = webPages;
     }
 
-    abstract Product parsePage(String url, String webPage) throws Exception; // To be defined in implementations
+    public abstract Product parsePage(String url, String webPage) throws Exception; // To be defined in implementations
 
     public Set<Product> parseProducts() {
 

@@ -1,4 +1,7 @@
-package crawler.PageParsers;
+package crawler.PageParsers.ParserEngine;
+
+import crawler.PageParsers.BurlingtonParser;
+import crawler.PageParsers.NascarParser;
 
 public class ParserFactory {
     // Builder factory to build any type of Parser type

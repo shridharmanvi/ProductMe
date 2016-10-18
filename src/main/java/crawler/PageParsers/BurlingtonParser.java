@@ -1,5 +1,6 @@
 package crawler.PageParsers;
 
+import crawler.PageParsers.ParserEngine.Parser;
 import crawler.core.LoadConfig;
 import crawler.product.Product;
 import org.jsoup.Jsoup;
