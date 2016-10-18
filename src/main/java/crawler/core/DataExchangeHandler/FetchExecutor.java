@@ -1,4 +1,4 @@
-package crawler.core;
+package crawler.core.DataExchangeHandler;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;

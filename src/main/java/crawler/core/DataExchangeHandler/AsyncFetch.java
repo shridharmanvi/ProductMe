@@ -1,4 +1,4 @@
-package crawler.core;
+package crawler.core.DataExchangeHandler;
 
 import java.util.HashMap;
 import java.util.Map;

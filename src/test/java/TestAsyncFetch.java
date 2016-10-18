@@ -1,9 +1,8 @@
 import crawler.PageParsers.BurlingtonParser;
-import crawler.core.AsyncFetch;
+import crawler.core.DataExchangeHandler.AsyncFetch;
 import crawler.core.LoadConfig;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -36,7 +35,7 @@ public class TestAsyncFetch {
 
     @Test
     public void testBurlingtonParser() {
-        BurlingtonParser burlingtonParser = new BurlingtonParser(new HashMap<String, String>());
+        BurlingtonParser burlingtonParser = new BurlingtonParser();
     }
 
     @Test

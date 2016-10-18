@@ -20,7 +20,7 @@ public class LoadConfig {
 
         if (inputStream != null) {
             try {
-                if (properties != null) {
+                if (properties == null) {
                     properties = new Properties();
                     properties.load(inputStream);
                 }

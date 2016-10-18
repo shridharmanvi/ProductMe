@@ -9,30 +9,30 @@ import java.util.Set;
 public abstract class Parser {
 
     private Map<String, String> webPages;
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<Product>();
 
-    Parser() {}
-
-    Parser(Map<String, String> webPages) {
+    public void setWebPages(Map<String, String> webPages) {
         this.webPages = webPages;
-        this.products = new HashSet<Product>();
     }
+
+    abstract Product parsePage(String url, String webPage) throws Exception; // To be defined in implementations
 
     public Set<Product> parseProducts() {
-        for (String url : this.webPages.keySet()) {
-            try {
-                products.add(parsePage(url, webPages.get(url))); // url, web page
-            } catch (Exception e) {
-                e.printStackTrace();
+
+        if (this.webPages != null) {
+
+            for (String url : this.webPages.keySet()) {
+                try {
+                    products.add(parsePage(url, webPages.get(url))); // url, web page
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+            return this.products;
+        } else {
+
+            System.out.println("Contents (webPages) Map not initialized. Use the Setter method to set contents");
+            return null;
         }
-        return this.products;
     }
-
-    abstract Product parsePage(String url, String webPage) throws Exception;
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
 }
