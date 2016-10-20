@@ -7,3 +7,5 @@ The user needs to define whats called as super-xpaths in the properties file and
 super-xpath is a way of instructing the crawler to reach the leaf nodes (product pages) from the root of the website or a sub category page.   
 Eg: category_url||xpath1||xpath2||xpath3
     This super-xpath instructs the crawler to start from the category_url, find all the links on the response page with xpath1, find all the links on these child pages with xpath2 and so on untill it hits the leaf nodes. These leaf urls are pages which we are interested in as these posses the information that we desire to scrape.
+
+NOTE: Make sure your IP is whitlisted by the client before running this app. The app makes several async http requests resulting in bot behaviour and hence your IP may be blacklisted for multiple websites. 
